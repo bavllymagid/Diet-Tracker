@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Tracker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #0A2540;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header .profile-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: url('profile-icon.png') no-repeat center center/cover;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .progress-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .progress-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#FFC107 0% 56%, #0A2540 56% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 28px;
+            color: #fff;
+            font-weight: bold;
+        }
+        .calories-text {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #0A2540;
+        }
+        .meal-container {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            border-left: 4px solid #FFC107;
+        }
+        .meal-container:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .meal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0A2540;
+        }
+        .meal-icon {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="title">History</span>
+        <div class="profile-icon"></div>
+    </div>
+    <div class="main-content">
+        <div class="progress-container">
+            <div class="progress-circle">56%</div>
+            <div class="calories-text">Calories Consumed: 1120/2000</div>
+        </div>
+        <div class="meal-container">
+            <div class="meal-header">
+                <span>Breakfast</span>
+                <img src="breakfast-icon.png" alt="Breakfast Icon" class="meal-icon">
+            </div>
+        </div>
+        <div class="meal-container">
+            <div class="meal-header">
+                <span>Lunch</span>
+                <img src="lunch-icon.png" alt="Lunch Icon" class="meal-icon">
+            </div>
+        </div>
+        <div class="meal-container">
+            <div class="meal-header">
+                <span>Dinner</span>
+                <img src="dinner-icon.png" alt="Dinner Icon" class="meal-icon">
+            </div>
+        </div>
+        <div class="meal-container">
+            <div class="meal-header">
+                <span>Snacks</span>
+                <img src="snack-icon.png" alt="Snacks Icon" class="meal-icon">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
