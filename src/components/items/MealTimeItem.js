@@ -5,24 +5,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../utils/DataStorage';
 import { getLocalData, setLocalData } from '../utils/DataStorage';
 
-const MealTimeItem = ({ timeName, onMealChange}) => {
+const MealTimeItem = ({timeName, onMealChange}) => {
     const [mealList, setMealList] = useState({});
     const [isHidden, setIsHidden] = useState(true);
 
-    // Helper function to generate unique key with date
     const generateKey = useCallback(() => {
         const date = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
         return `${timeName}-${date}`;
     }, [timeName]);
 
     useEffect(() => {
-        const uniqueKey = generateKey
-        const data = getLocalData(uniqueKey);
-        if (data) {
-            setMealList(data);
+        const uniqueKey = generateKey();
+        const storedMeals = getLocalData(uniqueKey);
+        if (storedMeals) {
+            setMealList(storedMeals);
         }
-    }
-    , [generateKey]);
+    }, [timeName, generateKey]);
 
     useEffect(() => {
         onMealChange();
