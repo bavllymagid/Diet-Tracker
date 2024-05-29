@@ -1,4 +1,29 @@
 .exceeded .CircularProgressbar-path {
-    stroke: red !important; /* Change the color of the progress bar to red */
-  }
-  
+  stroke: red !important;
+  /* Change the color of the progress bar to red */
+}
+
+.CircularProgressbar-path{
+  transition: stroke-dashoffset 0.5s;
+
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  max-width: 100%;
+}
+
+.text-container span {
+  font-size: 12px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.dog-img{
+  width: 3em;
+  padding: 0;
+}

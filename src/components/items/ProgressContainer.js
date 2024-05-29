@@ -11,9 +11,9 @@ const ProgressBar = ({ percentage }) => {
         <div className="progress-container">
             <CircularProgressbarWithChildren value={percentage} className={progressBarClass}>
                 {/* Put any JSX content in here that you'd like. It'll be vertically and horizontally centered. */}
-                <img style={{ width: 60, marginTop: -5 }} src="https://i.imgur.com/b9NyUGm.png" alt="doge" />
-                <div style={{ fontSize: 12, marginTop: -5 }}>
-                    <span className='bar-text'>{percentage}%</span> {/* changed text to span */}
+                <img className='dog-img' src="https://i.imgur.com/b9NyUGm.png" alt="doge" />
+                <div className='text-container'>
+                    <span className='bar-text'>{parseFloat(percentage).toFixed(2)}%</span> {/* changed text to span */}
                     <span className='bar-text'> Mate</span> {/* changed text to span */}
                 </div>
             </CircularProgressbarWithChildren>
