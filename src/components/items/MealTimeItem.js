@@ -79,6 +79,7 @@ const MealTimeItem = ({timeName, onMealChange}) => {
                         const uniqueKey = generateKey();
                         setLocalData(uniqueKey, updatedMealList);
                         toast.success("Meal Deleted Successfully!");
+                        saveCaloriesHistory(uniqueKey);
                     }}>
                         <span>{meal}</span>
                         <span>{mealList[meal]} cal</span>
