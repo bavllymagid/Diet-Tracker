@@ -17,7 +17,7 @@ const ProfilePage = () => {
                 <h1 className="profile-text">Profile</h1>
                 <div className="home-icon" onClick={() => {
                     // redirect to home page
-                    window.location.href = './DietTracker.js';
+                    window.location.href = './';
                 }}>🏠</div>
             </header>
             <div className="profile-info">
@@ -38,7 +38,7 @@ const ProfilePage = () => {
                 localStorage.setItem('weight', weight);
                 localStorage.setItem('height', height);
                 localStorage.setItem('goal', goal);
-                window.location.href = './DietTracker.js';
+                window.location.href = './';
             }}>Save</button>
         </div>
     );

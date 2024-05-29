@@ -46,8 +46,8 @@ const DietTracker = () => {
       </header>
       <ProgressBar percentage={state.percentage} />
       <div className="calories">
-        <h2>Calories Consumed</h2>
-        <p>{state.consumed}/{state.goal}</p>
+        <span>Calories Consumed</span>
+        <span>{state.consumed} / {state.goal}</span>
       </div>
       <div className="meal-tracker">
         <MealTimeItem timeName='Breakfast' onMealChange={updateConsumedCalories} />
