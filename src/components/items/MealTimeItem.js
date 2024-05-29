@@ -54,7 +54,11 @@ const MealTimeItem = ({ timeName, onMealChange}) => {
     return (
         <div className="meal-list">
             <div className="add-meal">
-                <span className="meal-time" onClick={() => toggleMealList(true)}>
+                <span className="meal-time" onClick={() => {
+                    toggleMealList(true);
+                    console.log("Meal Time Clicked!")
+                    }
+                    }>
                     {timeName}
                 </span>
                 <button className='add-btn' onClick={() => {

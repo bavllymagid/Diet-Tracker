@@ -26,6 +26,7 @@ function reducer(state, action) {
 const DietTracker = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate('/profile');
+  const hisClick = () => navigate('/history');
   const [state, dispatch] = useReducer(reducer, initialState);
   const [updateTrigger, setUpdateTrigger] = useState(false); 
 
@@ -49,7 +50,7 @@ const DietTracker = () => {
   return (
     <div className="diet-tracker">
       <header>
-        <h1 className="history-text">History</h1>
+        <h1 className="history-text" onClick={hisClick}>History</h1>
         <div className="profile-icon" onClick={handleClick}>👤</div>
       </header>
       <ProgressBar percentage={state.percentage} />
