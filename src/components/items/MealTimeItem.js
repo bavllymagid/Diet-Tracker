@@ -7,8 +7,15 @@ const MealTimeItem = ({ timeName }) => {
     const [mealList, setMealList] = useState({});
     const [isHidden, setIsHidden] = useState(true);
 
+    // Helper function to generate unique key with date
+    const generateKey = () => {
+        const date = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+        return `${timeName}-${date}`;
+    };
+
     useEffect(() => {
-        const storedMeals = JSON.parse(localStorage.getItem(timeName));
+        const uniqueKey = generateKey();
+        const storedMeals = JSON.parse(localStorage.getItem(uniqueKey));
         if (storedMeals) {
             setMealList(storedMeals);
         }
@@ -28,7 +35,9 @@ const MealTimeItem = ({ timeName }) => {
         }
         const updatedMealList = { ...mealList, [meal]: cal };
         setMealList(updatedMealList);
-        localStorage.setItem(timeName, JSON.stringify(updatedMealList));
+
+        const uniqueKey = generateKey();
+        localStorage.setItem(uniqueKey, JSON.stringify(updatedMealList));
         toast.success("Meal Added Successfully!");
     };
 
@@ -38,7 +47,7 @@ const MealTimeItem = ({ timeName }) => {
                 <span className="meal-time" onClick={() => toggleMealList(true)}>
                     {timeName}
                 </span>
-                <button className='add-btn' onClick={()=>{
+                <button className='add-btn' onClick={() => {
                     addMeal();
                     toggleMealList(false);
                 }}> ➕ </button>
