@@ -1,0 +1,4 @@
+.exceeded .CircularProgressbar-path {
+    stroke: red !important; /* Change the color of the progress bar to red */
+  }
+  

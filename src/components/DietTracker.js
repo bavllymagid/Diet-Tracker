@@ -1,44 +1,51 @@
 // DietTracker.jsx
-import React from 'react';
-import { CircularProgressbar, buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import React, { useState, useEffect, useCallback } from 'react';
 import './DietTracker.css';
-import './items/MealTimeItem.js';
 import MealTimeItem from './items/MealTimeItem.js';
+import ProgressBar from './items/ProgressContainer.js';
+import { sumAllCalories } from './utils/DataStorage';
 
 const DietTracker = () => {
   const goal = localStorage.getItem('goal') || 2000;
-  const consumed = localStorage.getItem('consumed') || 500;
-  const percentage = (consumed / goal) * 100; 
+
+  const [consumed, setConsumed] = useState(0);
+  const [percentage, setPercentage] = useState(0);
+
+  const updateConsumedCalories = useCallback(() => {
+    const consumedCalories = sumAllCalories(new Date().toISOString().split('T')[0]);
+    const consumedPercentage = (consumedCalories / goal) * 100;
+    setConsumed(consumedCalories);
+    setPercentage(consumedPercentage);
+  }, [goal]);
+
+  useEffect(() => {
+    updateConsumedCalories();
+  }, [updateConsumedCalories]);
 
   return (
     <div className="diet-tracker">
       <header>
-        <h1 className="history-text">Histroy</h1>
-        <div className="profile-icon">👤</div>
+        <h1 className="history-text">History</h1>
+        <div className="profile-icon" onClick={() => {
+          // redirect to profile page
+          window.location.href = './ProfilePage.js';
+        }}>👤</div>
       </header>
-      <div className="progress-container">
-        <CircularProgressbarWithChildren value={percentage}>
-          {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
-          <img style={{ width: 60, marginTop: -5 }} src="https://i.imgur.com/b9NyUGm.png" alt="doge" />
-          <div style={{ fontSize: 12, marginTop: -5 }}>
-            <text className='bar-text'>{percentage}%</text>
-            <text className='bar-text'> Mate</text>
-          </div>
-        </CircularProgressbarWithChildren>;
-      </div>
+      <ProgressBar percentage={percentage} />
       <div className="calories">
         <h2>Calories Consumed</h2>
-        <p>0/2000</p>
+        <p>{consumed}/{goal}</p>
       </div>
       <div className="meal-tracker">
-        <MealTimeItem timeName='Breakfast' />
-        <MealTimeItem timeName='Lunch' />
-        <MealTimeItem timeName='Dinner' />
-        <MealTimeItem timeName='Snack' />
+        <MealTimeItem timeName='Breakfast' onMealChange={updateConsumedCalories} />
+        <MealTimeItem timeName='Lunch' onMealChange={updateConsumedCalories} />
+        <MealTimeItem timeName='Dinner' onMealChange={updateConsumedCalories} />
+        <MealTimeItem timeName='Snack' onMealChange={updateConsumedCalories} />
       </div>
     </div>
   );
 };
 
 export default DietTracker;
+
+

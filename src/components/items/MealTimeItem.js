@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './MealTimeItem.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../utils/DataStorage';
+import { getLocalData, setLocalData } from '../utils/DataStorage';
 
-const MealTimeItem = ({ timeName }) => {
+const MealTimeItem = ({ timeName}) => {
     const [mealList, setMealList] = useState({});
     const [isHidden, setIsHidden] = useState(true);
 
     // Helper function to generate unique key with date
-    const generateKey = () => {
+    const generateKey = useCallback(() => {
         const date = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
         return `${timeName}-${date}`;
-    };
+    }, [timeName]);
 
     useEffect(() => {
         const uniqueKey = generateKey();
-        const storedMeals = JSON.parse(localStorage.getItem(uniqueKey));
+        const storedMeals = getLocalData(uniqueKey);
         if (storedMeals) {
             setMealList(storedMeals);
         }
-    }, [timeName]);
+    }, [timeName, generateKey]);
 
     const toggleMealList = (flag) => {
         setIsHidden(flag ? !isHidden : false);
@@ -27,17 +29,19 @@ const MealTimeItem = ({ timeName }) => {
 
     const addMeal = () => {
         const meal = prompt("Enter meal name");
-        const cal = parseInt(prompt("Enter calories in 100 grams of food"), 10);
-        if (!meal || isNaN(cal)) {
+        let cal = parseInt(prompt("Enter calories in 100 grams of food"), 10);
+        const weight = parseInt(prompt("Enter weight in grams"), 10);
+        if (!meal || isNaN(cal) || isNaN(weight)) {
             toast.error("Please Enter Valid Data!");
             toggleMealList(false);
             return;
         }
+        cal = (weight * cal) / 100;
         const updatedMealList = { ...mealList, [meal]: cal };
         setMealList(updatedMealList);
 
         const uniqueKey = generateKey();
-        localStorage.setItem(uniqueKey, JSON.stringify(updatedMealList));
+        setLocalData(uniqueKey, updatedMealList);
         toast.success("Meal Added Successfully!");
     };
 
