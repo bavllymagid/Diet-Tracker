@@ -5,7 +5,6 @@ import MealTimeItem from './items/MealTimeItem.js';
 import ProgressBar from './items/ProgressContainer.js';
 import { sumAllCalories } from './utils/DataStorage';
 import { useNavigate} from "react-router-dom";
-import { Button } from '@material-ui/core';
 import ProfilePage from './ProfilePage';
 
 
@@ -42,7 +41,7 @@ const DietTracker = () => {
     <div className="diet-tracker">
       <header>
         <h1 className="history-text">History</h1>
-        <Button className="profile-icon" onClick={handleClick}>👤</Button>
+        <div className="profile-icon" onClick={handleClick}>👤</div>
       </header>
       <ProgressBar percentage={state.percentage} />
       <div className="calories">
