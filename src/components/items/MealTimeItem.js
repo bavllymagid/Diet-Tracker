@@ -3,7 +3,7 @@ import './MealTimeItem.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../utils/DataStorage';
-import { getLocalData, setLocalData } from '../utils/DataStorage';
+import { getLocalData, setLocalData, saveCaloriesHistory} from '../utils/DataStorage';
 
 const MealTimeItem = ({timeName, onMealChange}) => {
     const [mealList, setMealList] = useState({});
@@ -47,6 +47,7 @@ const MealTimeItem = ({timeName, onMealChange}) => {
         const uniqueKey = generateKey();
         setLocalData(uniqueKey, updatedMealList);
         toast.success("Meal Added Successfully!");
+        saveCaloriesHistory(uniqueKey);
     };
 
     return (

@@ -20,19 +20,18 @@ const sumAllCalories = (date) => {
     return sum;
 }
 
-const saveCaloriesHistory = (date, id) => {
-    // get all caloris sum and save it local storage with the date as key
-    const sum = sumAllCalories(date);
-    setLocalData(date, sum);
-    // get the data from local storage as map and save it to the local storage with id history
+const saveCaloriesHistory = () => {
+    let date = new Date().toISOString().split('T')[0];
+    let sum = sumAllCalories(date);
+    console.log('Sum:', sum);
     const history = getLocalData('history');
     if (history === null) {
         setLocalData('history', { [date]: sum });
     }
     else{
-        history[date] += sum;
+        history[date] = sum;
         setLocalData('history', history);
     }
 }
 
-export { getLocalData, setLocalData, sumAllCalories };
+export { getLocalData, setLocalData, sumAllCalories, saveCaloriesHistory };

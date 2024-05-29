@@ -1,0 +1,42 @@
+.history-page{
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to top, #f0f4f8, #e0f7ff);
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    background: #e0f7ff;
+    margin-bottom: 20px;
+}
+
+.history-title{
+    padding: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.home-icon {
+    padding: 10px;
+    font-size: 2em;
+}
+
+ul{
+    list-style: none;
+    padding: 0 1rem;
+    margin: 0;
+}
+
+ul li {
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

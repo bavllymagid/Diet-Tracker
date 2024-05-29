@@ -14,6 +14,7 @@ const HistoryPage = () => {
     return (
         <div className="history-page">
             <header>
+                <span className='history-title'>History</span>
                 <div className="home-icon" onClick={()=>{
                     window.location.href = './';
                 }}>🏠</div>
