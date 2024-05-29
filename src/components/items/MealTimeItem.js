@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../utils/DataStorage';
 import { getLocalData, setLocalData } from '../utils/DataStorage';
 
-const MealTimeItem = ({ timeName}) => {
+const MealTimeItem = ({ timeName, onMealChange}) => {
     const [mealList, setMealList] = useState({});
     const [isHidden, setIsHidden] = useState(true);
 
@@ -16,12 +16,18 @@ const MealTimeItem = ({ timeName}) => {
     }, [timeName]);
 
     useEffect(() => {
-        const uniqueKey = generateKey();
-        const storedMeals = getLocalData(uniqueKey);
-        if (storedMeals) {
-            setMealList(storedMeals);
+        const uniqueKey = generateKey
+        const data = getLocalData(uniqueKey);
+        if (data) {
+            setMealList(data);
         }
-    }, [timeName, generateKey]);
+    }
+    , [generateKey]);
+
+    useEffect(() => {
+        onMealChange();
+    }
+    , [mealList, onMealChange]);
 
     const toggleMealList = (flag) => {
         setIsHidden(flag ? !isHidden : false);
@@ -58,7 +64,19 @@ const MealTimeItem = ({ timeName}) => {
             </div>
             <ul id={timeName} hidden={isHidden}>
                 {Object.keys(mealList).map((meal, index) => (
-                    <li key={index}>
+                    <li key={index} onClick={()=>{
+                        /*pop up to ask do you want to delete the meal and has yes and no button*/
+                        const flag = window.confirm("Are you sure you want to delete this meal: "+ meal + " ?");
+                        if(!flag){
+                            return;
+                        }
+                        const updatedMealList = { ...mealList };
+                        delete updatedMealList[meal];
+                        setMealList(updatedMealList);
+                        const uniqueKey = generateKey();
+                        setLocalData(uniqueKey, updatedMealList);
+                        toast.success("Meal Deleted Successfully!");
+                    }}>
                         <span>{meal}</span>
                         <span>{mealList[meal]} cal</span>
                     </li>

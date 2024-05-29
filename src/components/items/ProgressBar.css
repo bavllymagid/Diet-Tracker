@@ -3,11 +3,6 @@
   /* Change the color of the progress bar to red */
 }
 
-.CircularProgressbar-path{
-  transition: stroke-dashoffset 0.5s;
-
-}
-
 .text-container {
   display: flex;
   flex-direction: column;
