@@ -24,7 +24,7 @@ module.exports = {
             {
               // Cache other assets with StaleWhileRevalidate strategy
               urlPattern: /\.(?:png|jpg|jpeg|svg|js|css)$/,
-              handler: 'StaleWhileRevalidate',
+              handler: 'CacheFirst',
               options: {
                 cacheName: 'assets-cache',
                 expiration: {
