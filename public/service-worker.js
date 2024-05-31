@@ -1,0 +1,45 @@
+/* eslint-disable no-restricted-globals */
+const CACHE_NAME = 'v1';
+
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll([
+                'src/index.html',
+                'src/index.css',
+                'src/App.js',
+                'src/App.css',
+                'public/dogo.png',
+                'public/sadDogo.png',
+                'public/android-chrome-192x192.png',
+                'public/android-chrome-512x512.png',
+                'public/apple-touch-icon.png',
+                'public/favicon-16x16.png',
+                'public/favicon-32x32.png',
+                'public/favicon.ico',
+                'public/robots.txt',
+                'src/components/DietTracker.css',
+                'src/components/DietTracker.js',
+                'src/components/HistoryPage.css',
+                'src/components/HistoryPage.js',
+                'src/components/ProfilePage.css',
+                'src/components/ProfilePage.js',
+                'src/components/items/MealTimeItem.css',
+                'src/components/items/MealTimeItem.js',
+                'src/components/items/ProgressBar.css',
+                'src/components/items/ProgressContainer.js',
+                'src/components/utils/DataStorage.js',
+                'src/logo.svg'
+            ]);
+        })
+    );
+});
+
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+        })
+    );
+});
+
